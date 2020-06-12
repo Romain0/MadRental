@@ -1,0 +1,76 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "bffdb223005b0ad6892cb87b4967d8bc",
+    "entities": [
+      {
+        "tableName": "vehicules",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nom` TEXT, `inmg` TEXT, `dispo` INTEGER NOT NULL, `prixJournalier` REAL NOT NULL, `promotion` REAL NOT NULL, `ageMin` INTEGER NOT NULL, `categ` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nom",
+            "columnName": "nom",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "inmg",
+            "columnName": "inmg",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dispo",
+            "columnName": "dispo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prixJournalier",
+            "columnName": "prixJournalier",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "promotion",
+            "columnName": "promotion",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ageMin",
+            "columnName": "ageMin",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categ",
+            "columnName": "categ",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bffdb223005b0ad6892cb87b4967d8bc')"
+    ]
+  }
+}
