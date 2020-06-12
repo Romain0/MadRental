@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.imie.madrental.Vehicule;
 
-@Database(entities = {Vehicule.class}, version = 1)
+@Database(entities = {Vehicule.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase
 {
     public abstract VehiculeDAO coursesDAO();

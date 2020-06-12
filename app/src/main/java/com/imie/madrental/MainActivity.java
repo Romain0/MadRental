@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.imie.madrental.WS.ResultWS;
@@ -15,6 +18,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -29,18 +33,8 @@ public class MainActivity extends AppCompatActivity
         // init
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Recycler view
-        RecyclerView recyclerView = findViewById(R.id.listVehicule);
 
-        // better perform
-        recyclerView.setHasFixedSize(true);
-
-        // layout manager, décrivant comment les items sont disposés :
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // get values
-        // client HTTP :
+        // get values with HTTP client
         AsyncHttpClient client = new AsyncHttpClient();
         // call WS
         client.post("http://s519716619.onlinehome.fr/exchange/madrental/get-vehicules.php", new AsyncHttpResponseHandler()
@@ -50,11 +44,24 @@ public class MainActivity extends AppCompatActivity
             {
                 // response
                 String wsResponse = new String(response);
-                // conversion en un objet Java (à faire!) ayant le même format que le JSON :
+                Log.d(TAG, "onSuccess: " + wsResponse); // OK
+
                 Gson gson = new Gson();
-                ResultWS retourWS = gson.fromJson(wsResponse, ResultWS.class);
-                // affichage d'un attribut :
-                Log.i(TAG, "retour : " + retourWS.form.vehicule);
+                // Java Conversion
+                Vehicule[] enums = gson.fromJson(wsResponse, Vehicule[].class);
+                VehiculesAdapter vehiculesAdapter = new VehiculesAdapter(Arrays.asList(enums));
+
+                // Recycler view
+                RecyclerView recyclerView = findViewById(R.id.listVehicule);
+
+                // better perform
+                recyclerView.setHasFixedSize(true);
+
+                // layout manager, décrivant comment les items sont disposés :
+                LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
+                recyclerView.setLayoutManager(layoutManager);
+
+                recyclerView.setAdapter(vehiculesAdapter);
             }
 
             @Override
@@ -63,27 +70,22 @@ public class MainActivity extends AppCompatActivity
                 Log.e(TAG, e.toString());
             }
         });
-
-        // Test
-        List<Vehicule> listVehicules = new ArrayList<>();
-        listVehicules.add(new Vehicule(1, "pomme", "test", true, 10, 5, 12, 'A'));
-        listVehicules.add(new Vehicule(2, "poire", "test", true, 10, 5, 12, 'A'));
-        listVehicules.add(new Vehicule(2, "fraise", "test", true, 10, 5, 12, 'A'));
-        listVehicules.add(new Vehicule(2, "framboise", "test", true, 10, 5, 12, 'A'));
-        listVehicules.add(new Vehicule(2, "cerise", "test", true, 10, 5, 12, 'A'));
-        listVehicules.add(new Vehicule(2, "mure", "test", true, 10, 5, 12, 'A'));
-        /*List<Vehicule> listVehicules = AppDatabaseHelper
-                .getDatabase(this)
-                .vehiculeDAO()
-                .findAllVehicules();*/
-
-        // adapter
-        VehiculesAdapter vehiculesAdapter = new VehiculesAdapter(listVehicules);
-        recyclerView.setAdapter(vehiculesAdapter);
     }
 
+    // Button management
     public void clickButton(View view)
     {
-        // code pour afficher les favoris
+        switch (view.getId())
+        {
+/*            case R.id.vehiculeItem :
+                Intent intent = new Intent(this, DatailVahiculeActivity.class);
+                this.startActivity(intent);
+                break;*/
+            case R.id.favBtn :
+                Log.d(TAG, "clickButton: ");
+                break;
+            default:
+                Toast.makeText(this, "Bouton inconnu", Toast.LENGTH_SHORT).show();
+        }
     }
 }

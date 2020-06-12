@@ -3,31 +3,33 @@ package com.imie.madrental;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity(tableName = "vehicules")
 public class Vehicule
 {
     @PrimaryKey(autoGenerate = true)
     public long id;
     public String nom;
-    public String inmg;
-    public boolean dispo;
-    public float prixJournalier;
-    public float promotion;
-    public int ageMin;
-    public char categ;
+    public String image;
+    public long disponible;
+    public long prixjournalierbase;
+    public long promotion;
+    public long agemin;
+    public String categorieco2;
 
     // Constructors
     public Vehicule() {}
 
-    public Vehicule(long id, String nom, String inmg, boolean dispo, float prixJournalier, float promotion, int ageMin, char categ)
+    public Vehicule(long id, String nom, String image, long disponible, long prixjournalierbase, long promotion, long agemin, String categorieco2)
     {
         this.id = id;
         this.nom = nom;
-        this.inmg = inmg;
-        this.dispo = dispo;
-        this.prixJournalier = prixJournalier;
+        this.image = image;
+        this.disponible = disponible;
+        this.prixjournalierbase = prixjournalierbase;
         this.promotion = promotion;
-        this.ageMin = ageMin;
-        this.categ = categ;
+        this.agemin = agemin;
+        this.categorieco2 = categorieco2;
     }
 }

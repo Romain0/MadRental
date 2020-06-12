@@ -40,6 +40,11 @@ dependencies {
     implementation 'com.loopj.android:android-async-http:1.4.9'
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    // Parceler
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
     // base :
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.1.0'

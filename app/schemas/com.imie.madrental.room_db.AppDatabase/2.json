@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "b89974a067554695e9a7f53a96b78874",
+    "version": 2,
+    "identityHash": "03108c3501f560e47909656b29057532",
     "entities": [
       {
         "tableName": "vehicules",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nom` TEXT, `image` TEXT, `disponible` INTEGER NOT NULL, `prixjournalierbase` INTEGER NOT NULL, `promotion` INTEGER NOT NULL, `agemin` INTEGER NOT NULL, `categorieco2` TEXT, `equipements` TEXT, `options` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nom` TEXT, `image` TEXT, `disponible` INTEGER NOT NULL, `prixjournalierbase` INTEGER NOT NULL, `promotion` INTEGER NOT NULL, `agemin` INTEGER NOT NULL, `categorieco2` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -55,18 +55,6 @@
             "columnName": "categorieco2",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "equipements",
-            "columnName": "equipements",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "options",
-            "columnName": "options",
-            "affinity": "TEXT",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -82,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b89974a067554695e9a7f53a96b78874')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '03108c3501f560e47909656b29057532')"
     ]
   }
 }
