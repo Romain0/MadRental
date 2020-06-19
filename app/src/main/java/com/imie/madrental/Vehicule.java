@@ -5,11 +5,11 @@ import androidx.room.PrimaryKey;
 
 import org.parceler.Parcel;
 
-import java.util.List;
+import java.io.Serializable;
 
 @Parcel
 @Entity(tableName = "vehicules")
-public class Vehicule
+public class Vehicule implements Serializable
 {
     @PrimaryKey(autoGenerate = true)
     public long id;

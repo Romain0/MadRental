@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        FrameLayout frameLayoutConteneurDetail = findViewById(R.id.conteneur_detail);
+        if(frameLayoutConteneurDetail != null)
+            Log.d(TAG, "Victoire !");
+
         // init
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

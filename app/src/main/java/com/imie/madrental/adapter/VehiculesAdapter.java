@@ -52,7 +52,7 @@ public class VehiculesAdapter extends RecyclerView.Adapter<VehiculesAdapter.Vehi
     public void onBindViewHolder(VehiculeViewHolder holder, int position)
     {
         String txt = listVehicules.get(position).nom + "\n" +
-                listVehicules.get(position).prixjournalierbase + "\n" +
+                listVehicules.get(position).prixjournalierbase + "\u20ac \u002f jour\n Categorie : " +
                 listVehicules.get(position).categorieco2 + "\n"
                         ;
         holder.vehiculeTxTView.setText(txt);
@@ -81,7 +81,7 @@ public class VehiculesAdapter extends RecyclerView.Adapter<VehiculesAdapter.Vehi
             super(itemView);
             vehiculeTxTView = itemView.findViewById(R.id.vehiculeTxTView);
             vehiculeImageView = itemView.findViewById(R.id.vehiculeImageView);
-            frameLayoutConteneurDetail = itemView.findViewById(R.id.conteneur_detail);
+            frameLayoutConteneurDetail = itemView.findViewById(R.id.conteneur_detail); // Il est null alors qu'il existe et que l'écran est > 600dp
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
@@ -97,7 +97,7 @@ public class VehiculesAdapter extends RecyclerView.Adapter<VehiculesAdapter.Vehi
                         fragmentDetails.setArguments(bundle);
 
                         // le conteneur de la partie détail est disponible, on est donc en mode "tablette" :
-                        FragmentActivity myContext = new FragmentActivity();
+                        MainActivity myContext = new MainActivity();
                         myContext.getSupportFragmentManager().beginTransaction().replace(R.id.conteneur_detail, fragmentDetails).commit();
                     }
                     else

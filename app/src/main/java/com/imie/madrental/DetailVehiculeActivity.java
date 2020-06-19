@@ -22,9 +22,8 @@ public class DetailVehiculeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datail_vahicule);
+        setContentView(R.layout.activity_detail_vehicule);
 
-        Intent intent = getIntent();
         Vehicule vehiculeSent = Parcels.unwrap(getIntent().getParcelableExtra(VehiculesAdapter.getVEHICULE_DETAILS_KEY()));
 
         TextView txtVehiculeDetails = findViewById(R.id.txtVehiculeDetails);
