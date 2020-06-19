@@ -17,7 +17,7 @@ public class AppDatabaseHelper
     }
 
     // Getter instance
-    static synchronized AppDatabase getDatabase(Context context)
+    public static synchronized AppDatabase getDatabase(Context context)
     {
         if (databaseHelper == null)
         {

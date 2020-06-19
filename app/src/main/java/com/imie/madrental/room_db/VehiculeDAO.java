@@ -16,6 +16,9 @@ public abstract class VehiculeDAO
     @Query("SELECT * FROM vehicules")
     public abstract List<Vehicule> findAllVehicules();
 
+    @Query("SELECT * FROM vehicules WHERE id = :id")
+    public abstract Vehicule findOneById(int id);
+
     @Insert
     public abstract void insert(Vehicule... vehicules);
 

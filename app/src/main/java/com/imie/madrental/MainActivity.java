@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.imie.madrental.WS.ResultWS;
 import com.imie.madrental.adapter.VehiculesAdapter;
+import com.imie.madrental.room_db.AppDatabaseHelper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -34,6 +37,55 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // call WS
+        this.webServiceResult();
+    }
+
+    // Button management
+    public void clickButton(View view)
+    {
+        switch (view.getId())
+        {
+/*            case R.id.vehiculeItem :
+                Intent intent = new Intent(this, DatailVahiculeActivity.class);
+                this.startActivity(intent);
+                break;*/
+            case R.id.favBtn :
+                Log.d(TAG, "clickButton: ");
+
+                Switch favBtn = view.findViewById(R.id.favBtn);
+
+                if(favBtn.isChecked())
+                {
+                    List<Vehicule> vehiculeList = AppDatabaseHelper.getDatabase(this).coursesDAO().findAllVehicules();
+                    VehiculesAdapter vehiculesAdapter = new VehiculesAdapter(vehiculeList);
+
+                    // Recycler view
+                    RecyclerView recyclerView = findViewById(R.id.listVehicule);
+
+                    // better perform
+                    recyclerView.setHasFixedSize(true);
+
+                    // layout manager, décrivant comment les items sont disposés :
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext());
+                    recyclerView.setLayoutManager(layoutManager);
+
+                    recyclerView.setAdapter(vehiculesAdapter);
+                }
+                else
+                {
+                    // call WS too
+                    this.webServiceResult();
+                }
+
+                break;
+            default:
+                Toast.makeText(this, "Bouton inconnu", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void webServiceResult()
+    {
         // get values with HTTP client
         AsyncHttpClient client = new AsyncHttpClient();
         // call WS
@@ -70,22 +122,5 @@ public class MainActivity extends AppCompatActivity
                 Log.e(TAG, e.toString());
             }
         });
-    }
-
-    // Button management
-    public void clickButton(View view)
-    {
-        switch (view.getId())
-        {
-/*            case R.id.vehiculeItem :
-                Intent intent = new Intent(this, DatailVahiculeActivity.class);
-                this.startActivity(intent);
-                break;*/
-            case R.id.favBtn :
-                Log.d(TAG, "clickButton: ");
-                break;
-            default:
-                Toast.makeText(this, "Bouton inconnu", Toast.LENGTH_SHORT).show();
-        }
     }
 }

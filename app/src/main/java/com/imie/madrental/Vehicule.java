@@ -3,8 +3,11 @@ package com.imie.madrental;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 @Entity(tableName = "vehicules")
 public class Vehicule
 {
@@ -17,6 +20,14 @@ public class Vehicule
     public long promotion;
     public long agemin;
     public String categorieco2;
+
+/*
+Error :
+ En effet il faudrait ajouter une table de relation entre les objets Vehicule > Option et Vehicule > Equipement
+
+D:\Romain\Documents\androidStudioLibrary\MadRental\app\src\main\java\com\imie\madrental\Vehicule.java:23: error: Cannot figure out how to save this field into database. You can consider adding a type converter for it.
+    public List<List<String>> equipementsList;
+*/
 
     // Constructors
     public Vehicule() {}
